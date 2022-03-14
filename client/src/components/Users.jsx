@@ -11,8 +11,8 @@ export default function Users() {
 
       <ul id="users-list">
         {/* display all existing Users here */}
-        {users.map((individual) => (
-          <li>
+        {users.map((individual, index) => (
+          <li key={index}>
             {individual.name} {individual.email}
           </li>
         ))}
