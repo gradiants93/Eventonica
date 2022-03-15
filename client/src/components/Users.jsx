@@ -20,6 +20,9 @@ export default function Users() {
     e.preventDefault();
     const newUser = { id, name, email };
     setUsers([...users, newUser]);
+    setEmail("");
+    setID("");
+    setName("");
   };
 
   // check id state after it changes
