@@ -5,6 +5,10 @@ export default function Users() {
   const nemo = { name: "Nemo", email: "nemo@gmail.com", id: "2" };
   const dory = { name: "Dory", email: "dory@gmail.com", id: "3" };
   const [users, setUsers] = useState([marlin, nemo, dory]);
+  const [id, setID] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
   return (
     <section className="user-management">
       <h2>User Management</h2>
