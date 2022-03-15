@@ -1,13 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Users() {
   const marlin = { name: "Marlin", email: "marlin@gmail.com", id: "1" };
   const nemo = { name: "Nemo", email: "nemo@gmail.com", id: "2" };
   const dory = { name: "Dory", email: "dory@gmail.com", id: "3" };
+
   const [users, setUsers] = useState([marlin, nemo, dory]);
-  const [id, setID] = useState(null);
+  const [id, setID] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
+  const listUsers = users.map((user, index) => (
+    <li key={index}>
+      Id: {user.id} Name:{user.name} Email:{user.email}
+    </li>
+  ));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newUser = { id, name, email };
+    setUsers([...users, newUser]);
+  };
+
+  // check id state after it changes
+  useEffect(() => {
+    console.log(id);
+  }, [id]);
+  // check name state after it changes
+  useEffect(() => {
+    console.log(name);
+  }, [name]);
+  // check email state after it changes
+  useEffect(() => {
+    console.log(email);
+  }, [email]);
+  // check users state after it changes
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
 
   return (
     <section className="user-management">
@@ -15,19 +45,50 @@ export default function Users() {
 
       <ul id="users-list">
         {/* display all existing Users here */}
-        {users.map((individual, index) => (
-          <li key={index}>
-            {individual.name} {individual.email}
-          </li>
-        ))}
+        {listUsers}
       </ul>
 
       <div>
         <h3>Add User</h3>
-        <form id="add-user" action="#">
+        <form id="add-user" action="#" onSubmit={handleSubmit}>
+          <fieldset>
+            <label>ID:</label>
+            <input
+              type="text"
+              id="add-user-id"
+              value={id}
+              name="id"
+              required
+              onChange={(e) => {
+                setID(e.target.value);
+              }}
+            />
+          </fieldset>
           <fieldset>
             <label>Name</label>
-            <input type="text" id="add-user-name" />
+            <input
+              type="text"
+              id="add-user-name"
+              value={name}
+              name="name"
+              required
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+          </fieldset>
+          <fieldset>
+            <label>Email</label>
+            <input
+              type="text"
+              id="add-user-email"
+              value={email}
+              name="email"
+              required
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
           </fieldset>
           {/* Add more form fields here */}
           <input type="submit" value="Add" />
