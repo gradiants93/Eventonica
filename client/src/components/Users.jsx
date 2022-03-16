@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import DeleteUser from "./DeleteUser";
 
 export default function Users() {
   const marlin = { name: "Marlin", email: "marlin@gmail.com", id: "1" };
@@ -15,6 +16,16 @@ export default function Users() {
       Id: {user.id} Name:{user.name} Email:{user.email}
     </li>
   ));
+
+  const handleDeleteUser = (idToBeDeleted) => {
+    const updatedUsers = users.filter(
+      (individual) => individual.id !== idToBeDeleted
+    );
+    setUsers(updatedUsers);
+    // check users state after deletion
+    console.log(`Users updated after deleting`);
+    console.log(users);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -98,16 +109,7 @@ export default function Users() {
         </form>
       </div>
 
-      <div>
-        <h3>Delete User</h3>
-        <form id="delete-user" action="#">
-          <fieldset>
-            <label>User ID</label>
-            <input type="text" id="delete-user-id" />
-          </fieldset>
-          <input type="submit" />
-        </form>
-      </div>
+      <DeleteUser givenID={handleDeleteUser} />
     </section>
   );
 }
