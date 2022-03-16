@@ -4,24 +4,24 @@ export default function Events() {
   const mockEvents = [
     {
       id: "1",
-      name: "Birthday",
-      date: "2021-09-01",
-      description: "A birthday party for my best friend",
+      name: "Tzima Birthday",
+      date: "2021-03-10",
+      description: "Tzima turns 3!",
       category: "Celebration",
     },
     {
       id: "2",
-      name: "Graduation",
-      date: "2021-08-01",
-      description: "The class of 2021 graduates from East High",
+      name: "Beginning of the End",
+      date: "2021-06-27",
+      description: "Last week of Techtonica :<",
       category: "Education",
     },
     {
       id: "3",
-      name: "JS Study Session",
-      date: "2021-10-01",
-      description: "A chance to practice Javascript interview questions",
-      category: "Education",
+      name: "Mother's Day",
+      date: "2021-05-13",
+      description: "Celebrate all moms!",
+      category: "Celebration",
     },
   ];
 
