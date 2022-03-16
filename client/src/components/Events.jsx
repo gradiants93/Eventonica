@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 
 export default function Events() {
+  // const variables
   const mockEvents = [
     {
       id: "1",
@@ -24,9 +25,17 @@ export default function Events() {
       category: "Celebration",
     },
   ];
+  // States
+  const initialState = {
+    id: "",
+    name: "",
+    date: null,
+    description: "",
+    category: "",
+  };
+  const [events, setEvents] = useState(mockEvents); // for mockState use
 
-  const [events, setEvents] = useState(mockEvents);
-
+  // constant objects
   const listEvents = events.map(
     ({ name, id, description, date, category }, index) => (
       <li key={index}>
@@ -35,6 +44,36 @@ export default function Events() {
       </li>
     )
   );
+  const reducer = (state, action) => {
+    console.log(`The action is ${action} and the type is ${action.type}`);
+    switch (action.type) {
+      case editID:
+        console.log(`Dispatched editID with ${action.payload}`);
+        return { ...state, id: action.payload };
+      case editName:
+        console.log(`Dispatched editName with ${action.payload}`);
+        return { ...state, name: action.payload };
+      case editDate:
+        console.log(`Dispatched editDate with ${action.payload}`);
+        return { ...state, date: action.payload };
+      case editDescription:
+        console.log(`Dispatched editDescription with ${action.payload}`);
+        return { ...state, description: action.payload };
+      case editCategory:
+        console.log(`Dispatched editCategory with ${action.payload}`);
+        return { ...state, category: action.payload };
+      default:
+        console.log(`Action type is not a listed case. Type: ${action.type}`);
+        return state;
+    }
+  };
+  // Reducer things
+  const EventForm = () => {
+    const [events, setEvents] = useState([]);
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    return <div>...</div>;
+  };
 
   return (
     <section className="event-management">
