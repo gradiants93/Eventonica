@@ -14,7 +14,9 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
-  console.log(`The action is ${action} and the type is ${action.type}`);
+  console.log(
+    `The action is ${JSON.stringify(action)} and the type is ${action.type}`
+  );
   switch (action.type) {
     case "editID":
       console.log(`Dispatched editID with ${action.payload}`);
