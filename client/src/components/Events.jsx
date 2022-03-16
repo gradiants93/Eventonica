@@ -1,4 +1,10 @@
 import React, { useReducer, useState } from "react";
+
+/* TODO:
+Add success message on event submission
+Add date validation - must be in future
+*/
+
 const initialState = {
   id: "",
   name: "",
