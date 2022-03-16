@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import DeleteUser from "./DeleteUser";
 
 export default function Users() {
-  const marlin = { name: "Marlin", email: "marlin@gmail.com", id: "1" };
-  const nemo = { name: "Nemo", email: "nemo@gmail.com", id: "2" };
-  const dory = { name: "Dory", email: "dory@gmail.com", id: "3" };
+  const mockUsers = [
+    { name: "Marlin", email: "marlin@gmail.com", id: "1" },
+    { name: "Nemo", email: "nemo@gmail.com", id: "2" },
+    { name: "Dory", email: "dory@gmail.com", id: "3" },
+  ];
 
-  const [users, setUsers] = useState([marlin, nemo, dory]);
+  const [users, setUsers] = useState(mockUsers);
   const [id, setID] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
