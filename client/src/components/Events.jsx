@@ -49,10 +49,34 @@ export default function Events() {
         <h3>Add Event</h3>
         <form id="add-event" action="#">
           <fieldset>
+            <label>ID</label>
+            <input type="text" id="add-event-id" />
+          </fieldset>
+          <fieldset>
             <label>Name</label>
             <input
               type="text"
               id="add-event-name"
+              placeholder="Virtual corgi meetup"
+            />
+          </fieldset>
+          <fieldset>
+            <label>Date</label>
+            <input type="text" id="add-event-date" placeholder="2022-03-14" />
+          </fieldset>
+          <fieldset>
+            <label>Description</label>
+            <input
+              type="text"
+              id="add-event-Description"
+              placeholder="Virtual corgi meetup"
+            />
+          </fieldset>
+          <fieldset>
+            <label>Category</label>
+            <input
+              type="text"
+              id="add-event-category"
               placeholder="Virtual corgi meetup"
             />
           </fieldset>
