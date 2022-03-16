@@ -2,7 +2,7 @@ import React, { useReducer, useState } from "react";
 const initialState = {
   id: "",
   name: "",
-  date: null,
+  date: "",
   description: "",
   category: "",
 };
@@ -69,8 +69,13 @@ export default function Events() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newEvent = { state };
-    setEvents([...events, newEvent]);
+    if (state != initialState) {
+      const newEvent = state;
+      setEvents([...events, newEvent]);
+      dispatch({
+        type: "resetForm",
+      });
+    }
   };
 
   return (
@@ -103,6 +108,7 @@ export default function Events() {
               onChange={(e) =>
                 dispatch({ type: "editID", payload: e.target.value })
               }
+              required
             />
           </fieldset>
           <fieldset>
@@ -115,6 +121,7 @@ export default function Events() {
               onChange={(e) =>
                 dispatch({ type: "editName", payload: e.target.value })
               }
+              required
             />
           </fieldset>
           <fieldset>
@@ -127,6 +134,7 @@ export default function Events() {
               onChange={(e) =>
                 dispatch({ type: "editDate", payload: e.target.value })
               }
+              required
             />
           </fieldset>
           <fieldset>
@@ -151,6 +159,7 @@ export default function Events() {
               onChange={(e) =>
                 dispatch({ type: "editCategory", payload: e.target.value })
               }
+              required
             />
           </fieldset>
           {/* Add more form fields here */}
