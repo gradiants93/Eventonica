@@ -1,7 +1,41 @@
 import React, { useReducer, useState } from "react";
+const initialState = {
+  id: "",
+  name: "",
+  date: null,
+  description: "",
+  category: "",
+};
+
+const reducer = (state, action) => {
+  console.log(`The action is ${action} and the type is ${action.type}`);
+  switch (action.type) {
+    case "editID":
+      console.log(`Dispatched editID with ${action.payload}`);
+      return { ...state, id: action.payload };
+    case "editName":
+      console.log(`Dispatched editName with ${action.payload}`);
+      return { ...state, name: action.payload };
+    case "editDate":
+      console.log(`Dispatched editDate with ${action.payload}`);
+      return { ...state, date: action.payload };
+    case "editDescription":
+      console.log(`Dispatched editDescription with ${action.payload}`);
+      return { ...state, description: action.payload };
+    case "editCategory":
+      console.log(`Dispatched editCategory with ${action.payload}`);
+      return { ...state, category: action.payload };
+    case "resetForm":
+      console.log("Reset state");
+      return { id: "", name: "", date: "", description: "", category: "" };
+    default:
+      console.log(`Action type is not a listed case. Type: ${action.type}`);
+      return state;
+  }
+};
 
 export default function Events() {
-  // const variables
+  // Mock data/event use
   const mockEvents = [
     {
       id: "1",
@@ -25,54 +59,18 @@ export default function Events() {
       category: "Celebration",
     },
   ];
+  // const [events, setEvents] = useState(mockEvents);
+
   // States
-  const initialState = {
-    id: "",
-    name: "",
-    date: null,
-    description: "",
-    category: "",
-  };
-  const [events, setEvents] = useState(mockEvents); // for mockState use
+  const [events, setEvents] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  // constant objects
-  const listEvents = events.map(
-    ({ name, id, description, date, category }, index) => (
-      <li key={index}>
-        ID: {id} Name: {name} Date: {date} Description: {description} Category:{" "}
-        {category}
-      </li>
-    )
-  );
-  const reducer = (state, action) => {
-    console.log(`The action is ${action} and the type is ${action.type}`);
-    switch (action.type) {
-      case editID:
-        console.log(`Dispatched editID with ${action.payload}`);
-        return { ...state, id: action.payload };
-      case editName:
-        console.log(`Dispatched editName with ${action.payload}`);
-        return { ...state, name: action.payload };
-      case editDate:
-        console.log(`Dispatched editDate with ${action.payload}`);
-        return { ...state, date: action.payload };
-      case editDescription:
-        console.log(`Dispatched editDescription with ${action.payload}`);
-        return { ...state, description: action.payload };
-      case editCategory:
-        console.log(`Dispatched editCategory with ${action.payload}`);
-        return { ...state, category: action.payload };
-      default:
-        console.log(`Action type is not a listed case. Type: ${action.type}`);
-        return state;
-    }
-  };
-  // Reducer things
-  const EventForm = () => {
-    const [events, setEvents] = useState([]);
-    const [state, dispatch] = useReducer(reducer, initialState);
+  // constant actions/objects
 
-    return <div>...</div>;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newEvent = { state };
+    setEvents([...events, newEvent]);
   };
 
   return (
@@ -82,26 +80,54 @@ export default function Events() {
         <h3>All Events</h3>
         <ul id="events-list">
           {/* Display all Events here */}
-          {listEvents}
+          {events.length == 0 ? (
+            <p>No events yet!</p>
+          ) : (
+            events.map(({ name, id, description, date, category }, index) => (
+              <li key={index}>
+                ID: {id} Name: {name} Date: {date} Description: {description}{" "}
+                Category: {category}
+              </li>
+            ))
+          )}
         </ul>
 
         <h3>Add Event</h3>
-        <form id="add-event" action="#">
+        <form id="add-event" action="#" onSubmit={handleSubmit}>
           <fieldset>
             <label>ID</label>
-            <input type="text" id="add-event-id" />
+            <input
+              type="text"
+              id="add-event-id"
+              value={state.id}
+              onChange={(e) =>
+                dispatch({ type: "editID", payload: e.target.value })
+              }
+            />
           </fieldset>
           <fieldset>
             <label>Name</label>
             <input
               type="text"
               id="add-event-name"
-              placeholder="Virtual corgi meetup"
+              value={state.name}
+              placeholder="Name your event"
+              onChange={(e) =>
+                dispatch({ type: "editName", payload: e.target.value })
+              }
             />
           </fieldset>
           <fieldset>
             <label>Date</label>
-            <input type="text" id="add-event-date" placeholder="2022-03-14" />
+            <input
+              type="text"
+              id="add-event-date"
+              placeholder="2022-03-14"
+              value={state.date}
+              onChange={(e) =>
+                dispatch({ type: "editDate", payload: e.target.value })
+              }
+            />
           </fieldset>
           <fieldset>
             <label>Description</label>
@@ -109,6 +135,10 @@ export default function Events() {
               type="text"
               id="add-event-Description"
               placeholder="Virtual corgi meetup"
+              value={state.description}
+              onChange={(e) =>
+                dispatch({ type: "editDescription", payload: e.target.value })
+              }
             />
           </fieldset>
           <fieldset>
@@ -116,12 +146,31 @@ export default function Events() {
             <input
               type="text"
               id="add-event-category"
-              placeholder="Virtual corgi meetup"
+              placeholder="Virtual"
+              value={state.category}
+              onChange={(e) =>
+                dispatch({ type: "editCategory", payload: e.target.value })
+              }
             />
           </fieldset>
           {/* Add more form fields here */}
           <input type="submit" />
         </form>
+        <button
+          id="reset-add-event"
+          onClick={(e) =>
+            dispatch({
+              type: "resetForm",
+            })
+          }
+        >
+          Reset Form
+        </button>
+      </div>
+      <div>
+        <h4>Current State:</h4>
+        {/* Show state for visual debugging */}
+        {JSON.stringify(state, null, 2)}
       </div>
     </section>
   );
