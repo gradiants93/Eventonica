@@ -27,12 +27,14 @@ export default function Events() {
 
   const [events, setEvents] = useState(mockEvents);
 
-  const listEvents = events.map((event, index) => (
-    <li key={index}>
-      Id: {event.id} Name:{event.name} Date: {event.description} Description:
-      {event.description} Category: {event.category}
-    </li>
-  ));
+  const listEvents = events.map(
+    ({ name, id, description, date, category }, index) => (
+      <li key={index}>
+        ID: {id} Name:{name} Date: {date} Description: {description} Category:{" "}
+        {category}
+      </li>
+    )
+  );
 
   return (
     <section className="event-management">
@@ -41,7 +43,7 @@ export default function Events() {
         <h3>All Events</h3>
         <ul id="events-list">
           {/* Display all Events here */}
-          <li>...</li>
+          {listEvents}
         </ul>
 
         <h3>Add Event</h3>
