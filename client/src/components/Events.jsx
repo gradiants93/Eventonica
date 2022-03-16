@@ -30,7 +30,7 @@ export default function Events() {
   const listEvents = events.map(
     ({ name, id, description, date, category }, index) => (
       <li key={index}>
-        ID: {id} Name:{name} Date: {date} Description: {description} Category:{" "}
+        ID: {id} Name: {name} Date: {date} Description: {description} Category:{" "}
         {category}
       </li>
     )
