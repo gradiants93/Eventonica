@@ -1,0 +1,11 @@
+# ignore all .DS_Store
+*.DS_Store
+
+# Project environment keys
+*.env
+
+# Any VS code extras
+*.vs/
+
+# Any node_modules
+node_modules
