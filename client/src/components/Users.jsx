@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DeleteUser from "./DeleteUser";
 
 /* TODO
-  Add a delete
+  Add a delete user from server
 */
 
 export default function Users() {
