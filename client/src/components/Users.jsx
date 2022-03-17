@@ -20,7 +20,23 @@ export default function Users() {
       .then((jsonRes) => setUsers(jsonRes.users));
   };
   // add user to db
-  const addUser = () => {};
+  const addUser = async (userToAdd) => {
+    setUsers([...users, userToAdd]);
+    await fetch("http://localhost:4000/users", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        mode: "cors",
+      },
+      body: JSON.stringify(userToAdd),
+    })
+      .then((res) => {
+        res.json();
+      })
+      .then((data) => console.log("Success: ", data))
+      .catch((err) => console.error("There was a boo boo: ", err));
+  };
 
   // delete user from db
   const deleteUser = () => {};
@@ -46,10 +62,11 @@ export default function Users() {
     console.log(users);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newUser = { id, name, email };
-    setUsers([...users, newUser]);
+    await addUser(newUser);
+    // setUsers([...users, newUser]);
     setEmail("");
     setID("");
     setName("");
@@ -129,6 +146,11 @@ export default function Users() {
       </div>
 
       <DeleteUser givenID={handleDeleteUser} />
+      <div>
+        <h4>Current State:</h4>
+        {/* Show state for visual debugging */}
+        {JSON.stringify(users, null, 2)}
+      </div>
     </section>
   );
 }

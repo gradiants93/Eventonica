@@ -15,8 +15,12 @@ router.get("/", function (req, res, next) {
 });
 // add to users listing
 router.post("/", function (req, res, next) {
-  res, send(req.body);
-  res.send("User has been added", mockUsers);
+  console.log(req.headers);
+  mockUsers.push(req.body);
+  console.log(req.body, "the POST body");
+  res.status(201).send(`Added user ${res.body}`);
+  console.log("User has been added", users);
+  res.send(req.body);
 });
 
 // delete from users listing
