@@ -13,5 +13,12 @@ router.get("/", function (req, res, next) {
   console.log(req.body, "the body");
   res.json({ users: mockUsers });
 });
+// add to users listing
+router.post("/", function (req, res, next) {
+  res, send(req.body);
+  res.send("User has been added", mockUsers);
+});
+
+// delete from users listing
 
 module.exports = router;

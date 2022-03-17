@@ -2,16 +2,33 @@ import React, { useEffect, useState } from "react";
 import DeleteUser from "./DeleteUser";
 
 export default function Users() {
-  const mockUsers = [
-    { name: "Marlin", email: "marlin@gmail.com", id: "1" },
-    { name: "Nemo", email: "nemo@gmail.com", id: "2" },
-    { name: "Dory", email: "dory@gmail.com", id: "3" },
-  ];
+  // const mockUsers = [
+  //   { name: "Marlin", email: "marlin@gmail.com", id: "1" },
+  //   { name: "Nemo", email: "nemo@gmail.com", id: "2" },
+  //   { name: "Dory", email: "dory@gmail.com", id: "3" },
+  // ];
 
-  const [users, setUsers] = useState(mockUsers);
+  const [users, setUsers] = useState([]);
   const [id, setID] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
+  // grab users from server(db?)
+  const getUsers = () => {
+    fetch("http://localhost:4000/users")
+      .then((res) => res.json())
+      .then((jsonRes) => setUsers(jsonRes.users));
+  };
+  // add user to db
+  const addUser = () => {};
+
+  // delete user from db
+  const deleteUser = () => {};
+
+  // set users to be api call result
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   const listUsers = users.map((user, index) => (
     <li key={index}>
