@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import DeleteUser from "./DeleteUser";
 
+/* TODO
+  Add a delete
+*/
+
 export default function Users() {
   // const mockUsers = [
   //   { name: "Marlin", email: "marlin@gmail.com", id: "1" },
