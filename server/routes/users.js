@@ -25,21 +25,6 @@ router.get("/", async function (req, res, next) {
 
 // add to users listing
 router.post("/", async function (req, res, next) {
-  // const addThisUser = {
-  //   name: req.body.name,
-  //   email: req.body.email,
-  // };
-  // console.log(addThisUser, "to be added");
-  // try {
-  //   const newUser = await db.one("INSERT INTO users(name, email) V", [
-  //     addThisUser.name,
-  //     addThisUser.email,
-  //   ]);
-  //   res.send(users);
-  // } catch (e) {
-  //   return res.status(400).json({ e });
-  // }
-
   try {
     await db
       .one("INSERT INTO users(name, email) VALUES($1, $2) RETURNING *", [
