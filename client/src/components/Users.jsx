@@ -41,17 +41,19 @@ export default function Users() {
 
   // delete user from db
   const deleteUser = async (idToBeDeleted) => {
-    await fetch("http://localhost:4000/users", {
+    await fetch(`http://localhost:4000/users/${idToBeDeleted}`, {
       method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        mode: "cors",
-      },
-      body: JSON.stringify(idToBeDeleted),
     })
+      .then((res) => res.json())
       .then((data) => console.log("Successfully deleted ", data))
       .catch((err) => console.error("There was a boo boo: ", err));
+    const updatedUsers = users.filter(
+      (individual) => individual.id !== idToBeDeleted
+    );
+    setUsers(updatedUsers);
+    // check users state after deletion
+    console.log(`Users updated after deleting`);
+    console.log(users);
   };
 
   // set users to be api call result
