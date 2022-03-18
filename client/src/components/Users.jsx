@@ -51,7 +51,8 @@ export default function Users() {
     const updatedUsers = users.filter(
       (individual) => individual.id !== idToBeDeleted
     );
-    setUsers(updatedUsers);
+    // setUsers(updatedUsers);
+    getUsers();
     // check users state after deletion
     console.log(`Users updated after deleting`);
     console.log(users);
