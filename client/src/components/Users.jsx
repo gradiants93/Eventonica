@@ -21,7 +21,7 @@ export default function Users() {
   const getUsers = () => {
     fetch("http://localhost:4000/users")
       .then((res) => res.json())
-      .then((jsonRes) => setUsers(jsonRes.users));
+      .then((jsonRes) => setUsers(jsonRes));
   };
   // add user to db
   const addUser = async (userToAdd) => {
@@ -68,7 +68,7 @@ export default function Users() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newUser = { id, name, email };
+    const newUser = { name, email };
     await addUser(newUser);
     // setUsers([...users, newUser]);
     setEmail("");
@@ -105,7 +105,7 @@ export default function Users() {
       <div>
         <h3>Add User</h3>
         <form id="add-user" action="#" onSubmit={handleSubmit}>
-          <fieldset>
+          {/* <fieldset>
             <label>ID:</label>
             <input
               type="text"
@@ -117,7 +117,7 @@ export default function Users() {
                 setID(e.target.value);
               }}
             />
-          </fieldset>
+          </fieldset> */}
           <fieldset>
             <label>Name</label>
             <input
