@@ -71,10 +71,12 @@ router.delete("/:id", async function (req, res, next) {
   console.log(`Id being sent is ${req.params.id}`);
   try {
     await db
-      .none("DELETE FROM users WHERE id=$1", [req.params.id])
+      .one("DELETE FROM users WHERE id=$1 RETURNING *", [req.params.id])
       .then((data) => {
-        console.log(`Successfully deleted ${data}`);
-        res.send(data);
+        console.log(`Successfully removed`);
+        res
+          .sendStatus(204)
+          .send({ message: `deleted item with id: ${data.id}` });
       });
   } catch (e) {
     return res.status(400).json({ e });

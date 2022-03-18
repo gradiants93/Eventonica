@@ -25,7 +25,6 @@ export default function Users() {
   };
   // add user to db
   const addUser = async (userToAdd) => {
-    setUsers([...users, userToAdd]);
     await fetch("http://localhost:4000/users", {
       method: "POST",
       headers: {
@@ -35,8 +34,10 @@ export default function Users() {
       },
       body: JSON.stringify(userToAdd),
     })
+      .then((res) => res.json())
       .then((data) => console.log("Success: ", data))
       .catch((err) => console.error("There was a boo boo: ", err));
+    getUsers();
   };
 
   // delete user from db
