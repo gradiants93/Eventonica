@@ -1,13 +1,14 @@
 var express = require("express");
+const { func } = require("../db/db-connection");
 var router = express.Router();
 var db = require("../db/db-connection");
 
-// mock data
-let mockUsers = [
-  { id: 1, name: "Marlin", email: "marlin@gmail.com" },
-  { id: 2, name: "Nemo", email: "nemo@gmail.com" },
-  { id: 3, name: "Dory", email: "dory@gmail.com" },
-];
+// // mock data
+// let mockUsers = [
+//   { id: 1, name: "Marlin", email: "marlin@gmail.com" },
+//   { id: 2, name: "Nemo", email: "nemo@gmail.com" },
+//   { id: 3, name: "Dory", email: "dory@gmail.com" },
+// ];
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {
@@ -64,5 +65,15 @@ router.post("/", async function (req, res, next) {
 });
 
 // delete from users listing
+router.delete("/", async function (req, res, next) {
+  try {
+    await db.none("DELETE FROM users WHERE id=$1", [req.body]).then((data) => {
+      console.log(data);
+      res.send(data);
+    });
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
 
 module.exports = router;

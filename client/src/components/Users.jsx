@@ -40,7 +40,19 @@ export default function Users() {
   };
 
   // delete user from db
-  const deleteUser = () => {};
+  const deleteUser = async (idToBeDeleted) => {
+    await fetch("http://localhost:4000/users", {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        mode: "cors",
+      },
+      body: JSON.stringify(idToBeDeleted),
+    })
+      .then((data) => console.log("Successfully deleted ", data))
+      .catch((err) => console.error("There was a boo boo: ", err));
+  };
 
   // set users to be api call result
   useEffect(() => {
@@ -54,13 +66,14 @@ export default function Users() {
   ));
 
   const handleDeleteUser = (idToBeDeleted) => {
-    const updatedUsers = users.filter(
-      (individual) => individual.id !== idToBeDeleted
-    );
-    setUsers(updatedUsers);
-    // check users state after deletion
-    console.log(`Users updated after deleting`);
-    console.log(users);
+    deleteUser(idToBeDeleted);
+    // const updatedUsers = users.filter(
+    //   (individual) => individual.id !== idToBeDeleted
+    // );
+    // setUsers(updatedUsers);
+    // // check users state after deletion
+    // console.log(`Users updated after deleting`);
+    // console.log(users);
   };
 
   const handleSubmit = async (e) => {
