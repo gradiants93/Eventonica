@@ -54,6 +54,7 @@ router.post("/", async function (req, res, next) {
     return res.status(400).json({ e });
   }
 
+  // // Hard code to add to server
   // console.log(req.headers);
   // mockUsers.push(req.body);
   // console.log(req.body, "the POST body");
