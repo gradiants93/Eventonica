@@ -35,9 +35,6 @@ export default function Users() {
       },
       body: JSON.stringify(userToAdd),
     })
-      .then((res) => {
-        res.json();
-      })
       .then((data) => console.log("Success: ", data))
       .catch((err) => console.error("There was a boo boo: ", err));
   };
