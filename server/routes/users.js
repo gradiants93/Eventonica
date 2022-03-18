@@ -66,7 +66,7 @@ router.post("/", async function (req, res, next) {
 
 // delete from users listing
 
-// need more help
+// need more help (WHY AM I GETTING A 400?!?!?!)
 router.delete("/:id", async function (req, res, next) {
   console.log(`Id being sent is ${req.params.id}`);
   try {
