@@ -70,10 +70,12 @@ router.post("/", async function (req, res, next) {
 router.delete("/:id", async function (req, res, next) {
   console.log(`Id being sent is ${req.params.id}`);
   try {
-    await db.none("DELETE FROM users WHERE id=$1", [req.body]).then((data) => {
-      console.log(`Successfully deleted ${data}`);
-      res.send(data);
-    });
+    await db
+      .none("DELETE FROM users WHERE id=$1", [req.params.id])
+      .then((data) => {
+        console.log(`Successfully deleted ${data}`);
+        res.send(data);
+      });
   } catch (e) {
     return res.status(400).json({ e });
   }
